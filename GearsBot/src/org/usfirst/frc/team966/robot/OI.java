@@ -54,58 +54,58 @@ public class OI {
     }
 
     
-    public Joystick getJoystick() {
-        return xbox1;
-	}
-    double xbox1_y1() {
+//    public Joystick getJoystick(){
+//        return xbox1;
+//	}
+    public double xbox1_y1() {
     	return xbox1.getRawAxis(1);
     }
-    double xbox1_x1() {
+    public double xbox1_x1() {
     	return xbox1.getRawAxis(0);
     }
-    double xbox1_lT() {
+    public double xbox1_lT() {
     	return xbox1.getRawAxis(2);
     }
-    double xbox1_rT() {
+    public double xbox1_rT() {
     	return xbox1.getRawAxis(3);
     }
-    double xbox1_x2() {
+    public double xbox1_x2() {
     	return xbox1.getRawAxis(4);
     }
-    double xbox1_y2() {
+    public double xbox1_y2() {
     	return xbox1.getRawAxis(5);
     }
-    double xbox2_x1() {
+    public double xbox2_x1() {
     	return xbox2.getRawAxis(0);
     }
-    double xbox2_y1() {
+    public double xbox2_y1() {
     	return xbox2.getRawAxis(1);
     }
-    double xbox2_lT() {
+    public double xbox2_lT() {
     	return xbox2.getRawAxis(2);
     }
-    double xbox2_rT() {
+    public double xbox2_rT() {
     	return xbox2.getRawAxis(3);
     }
-    double xbox2_x2() {
+    public double xbox2_x2() {
     	return xbox2.getRawAxis(4);
     }
-    double xbox2_y2() {
+    public double xbox2_y2() {
     	return xbox2.getRawAxis(5);
     }
-    boolean xbox1_a() {
+    public boolean xbox1_a() {
     	if (!xbox1.getRawButton(1)){
     		Xbox1arr[0] = false;
     	}
     	return xbox1.getRawButton(1);
     }
-    boolean xbox1_b() {
+    public boolean xbox1_b() {
     	if (!xbox1.getRawButton(2)){
     		Xbox1arr[1] = false;
     	}
     	return xbox1.getRawButton(2);
     }
-    boolean xbox1_x() {
+    public boolean xbox1_x() {
     	if (!xbox1.getRawButton(3)){
     		Xbox1arr[2] = false;
     	}
@@ -117,43 +117,43 @@ public class OI {
     	}
     	return xbox1.getRawButton(4);
     }
-    boolean xbox1_rb() {
+    public boolean xbox1_rb() {
     	if (!xbox1.getRawButton(6)){
     		Xbox1arr[5] = false;
     	}
     	return xbox1.getRawButton(6);
     }
-    boolean xbox1_lb() {
+    public boolean xbox1_lb() {
     	if (!xbox1.getRawButton(5)){
     		Xbox1arr[4] = false;
     	}
     	return xbox1.getRawButton(5);
     }
-    boolean xbox1_select() {
+    public boolean xbox1_select() {
     	if (!xbox1.getRawButton(7)){
     		Xbox1arr[6] = false;
     	}
     	return xbox1.getRawButton(7);
     }
-    boolean xbox1_start() {
+    public boolean xbox1_start() {
     	if (!xbox1.getRawButton(8)){
     		Xbox1arr[7] = false;
     	}
     	return xbox1.getRawButton(8);
     }
-    boolean xbox1_lClick() {
+    public boolean xbox1_lClick() {
     	if (!xbox1.getRawButton(9)){
     		Xbox1arr[8] = false;
     	}
     	return xbox1.getRawButton(9);
     }
-    boolean xbox1_rClick() {
+    public boolean xbox1_rClick() {
     	if (!xbox1.getRawButton(10)){
     		Xbox1arr[9] = false;
     	}
     	return xbox1.getRawButton(10);
     }
-    boolean xbox1_aTapped() {
+    public boolean xbox1_aTapped() {
     	if(!xbox1.getRawButton(1)){
     		Xbox1arr[0] = false;
     		return false;
@@ -169,7 +169,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_bTapped() {
+    public boolean xbox1_bTapped() {
     	if(!xbox1.getRawButton(2)){
     		Xbox1arr[1] = false;
     		return false;
@@ -185,7 +185,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_xTapped() {
+    public boolean xbox1_xTapped() {
     	if(!xbox1.getRawButton(3)){
     		Xbox1arr[2] = false;
     		return false;
@@ -201,7 +201,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_yTapped() {
+    public boolean xbox1_yTapped() {
     	if(!xbox1.getRawButton(4)){
     		Xbox1arr[3] = false;
     		return false;
@@ -217,7 +217,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_lBTapped() {
+    public boolean xbox1_lBTapped() {
     	if(!xbox1.getRawButton(5)){
     		Xbox1arr[4] = false;
     		return false;
@@ -233,7 +233,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_rBTapped() {
+    public boolean xbox1_rBTapped() {
     	if(!xbox1.getRawButton(6)){
     		Xbox1arr[5] = false;
     		return false;
@@ -249,7 +249,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_selectTapped() {
+    public boolean xbox1_selectTapped() {
     	if(!xbox1.getRawButton(7)){
     		Xbox1arr[6] = false;
     		return false;
@@ -265,7 +265,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_startTapped() {
+    public boolean xbox1_startTapped() {
     	if(!xbox1.getRawButton(8)){
     		Xbox1arr[7] = false;
     		return false;
@@ -281,7 +281,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_lClickTapped() {
+    public boolean xbox1_lClickTapped() {
     	if(!xbox1.getRawButton(9)){
     		Xbox1arr[8] = false;
     		return false;
@@ -297,7 +297,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_rClickTapped() {
+    public boolean xbox1_rClickTapped() {
     	if(!xbox1.getRawButton(10)){
     		Xbox1arr[9] = false;
     		return false;
@@ -313,7 +313,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_lTTapped() {
+    public boolean xbox1_lTTapped() {
     	if(xbox1.getRawAxis(2) <= .50){
     		Xbox1arr[10] = false;
     		return false;
@@ -329,7 +329,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox1_rTTapped() {
+    public boolean xbox1_rTTapped() {
     	if(xbox1.getRawAxis(3) <= .50){
     		Xbox1arr[11] = false;
     		return false;
@@ -348,55 +348,55 @@ public class OI {
     int xbox1_POV(){
     	return xbox1.getPOV();
     }
-    boolean xbox1_POVN() {
+    public boolean xbox1_POVN() {
     	if (xbox1.getPOV()!=0){
     		Xbox1arrPOV[0] = false;
     	}
     	return xbox1.getPOV()==0;
     }
-    boolean xbox1_POVNE() {
+    public boolean xbox1_POVNE() {
     	if (xbox1.getPOV()!=45){
     		Xbox1arrPOV[1] = false;
     	}
     	return xbox1.getPOV()==45;
     }
-    boolean xbox1_POVE() {
+    public boolean xbox1_POVE() {
     	if (xbox1.getPOV()!=90){
     		Xbox1arrPOV[2] = false;
     	}
     	return xbox1.getPOV()==90;
     }
-    boolean xbox1_POVSE() {
+    public boolean xbox1_POVSE() {
     	if (xbox1.getPOV()!=135){
     		Xbox1arrPOV[3] = false;
     	}
     	return xbox1.getPOV()==135;
     }
-    boolean xbox1_POVS() {
+    public boolean xbox1_POVS() {
     	if (xbox1.getPOV()!=180){
     		Xbox1arrPOV[4] = false;
     	}
     	return xbox1.getPOV()==180;
     }
-    boolean xbox1_POVSW() {
+    public boolean xbox1_POVSW() {
     	if (xbox1.getPOV()!=225){
     		Xbox1arrPOV[5] = false;
     	}
     	return xbox1.getPOV()==255;
     }
-    boolean xbox1_POVW() {
+    public boolean xbox1_POVW() {
     	if (xbox1.getPOV()!=270){
     		Xbox1arrPOV[6] = false;
     	}
     	return xbox1.getPOV()==270;
     }
-    boolean xbox1_POVNW() {
+    public boolean xbox1_POVNW() {
     	if (xbox1.getPOV()!=315){
     		Xbox1arrPOV[7] = false;
     	}
     	return xbox1.getPOV()==315;
     }
-    boolean xbox1_POVNTapped() {
+    public boolean xbox1_POVNTapped() {
     	if (xbox1.getPOV()!=0){
     		Xbox1arrPOV[0] = false;
     		return false;
@@ -412,7 +412,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVNETapped() {
+    public boolean xbox1_POVNETapped() {
     	if (xbox1.getPOV()!=45){
     		Xbox1arrPOV[1] = false;
     		return false;
@@ -428,7 +428,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVETapped() {
+    public boolean xbox1_POVETapped() {
     	if (xbox1.getPOV()!=90){
     		Xbox1arrPOV[2] = false;
     		return false;
@@ -444,7 +444,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVSETapped() {
+    public boolean xbox1_POVSETapped() {
     	if (xbox1.getPOV()!=135){
     		Xbox1arrPOV[3] = false;
     		return false;
@@ -460,7 +460,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVSTapped() {
+    public boolean xbox1_POVSTapped() {
     	if (xbox1.getPOV()!=180){
     		Xbox1arrPOV[4] = false;
     		return false;
@@ -476,7 +476,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVSWTapped() {
+    public boolean xbox1_POVSWTapped() {
     	if (xbox1.getPOV()!=225){
     		Xbox1arrPOV[5] = false;
     		return false;
@@ -492,7 +492,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVWTapped() {
+    public boolean xbox1_POVWTapped() {
     	if (xbox1.getPOV()!=270){
     		Xbox1arrPOV[6] = false;
     		return false;
@@ -508,7 +508,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox1_POVNWTapped() {
+    public boolean xbox1_POVNWTapped() {
     	if (xbox1.getPOV()!=315){
     		Xbox1arrPOV[7] = false;
     		return false;
@@ -526,67 +526,67 @@ public class OI {
     }
     
 // 2nd xbox conroller************************************************************************    
-    boolean xbox2_a() {
+    public boolean xbox2_a() {
     	if (!xbox2.getRawButton(1)){
     		Xbox2arr[0] = false;
     	}
     	return xbox2.getRawButton(1);
     }
-    boolean xbox2_b() {
+    public boolean xbox2_b() {
     	if (!xbox2.getRawButton(2)){
     		Xbox2arr[1] = false;
     	}
     	return xbox2.getRawButton(2);
     }
-    boolean xbox2_x() {
+    public boolean xbox2_x() {
     	if (!xbox2.getRawButton(4)){
     		Xbox2arr[3] = false;
     	}
     	return xbox2.getRawButton(4);
     }
-    boolean xbox2_y() {
+    public boolean xbox2_y() {
     	if (!xbox2.getRawButton(5)){
     		Xbox2arr[4] = false;
     	}
     	return xbox2.getRawButton(5);
     }
-    boolean xbox2_rb() {
+    public boolean xbox2_rb() {
     	if (!xbox2.getRawButton(6)){
     		Xbox2arr[5] = false;
     	}
     	return xbox2.getRawButton(6);
     }
-    boolean xbox2_lb() {
+    public boolean xbox2_lb() {
     	if (!xbox2.getRawButton(5)){
     		Xbox2arr[4] = false;
     	}
     	return xbox2.getRawButton(5);
     }
-    boolean xbox2_select() {
+    public boolean xbox2_select() {
     	if (!xbox2.getRawButton(7)){
     		Xbox2arr[6] = false;
     	}
     	return xbox2.getRawButton(7);
     }
-    boolean xbox2_start() {
+    public boolean xbox2_start() {
     	if (!xbox2.getRawButton(8)){
     		Xbox2arr[7] = false;
     	}
     	return xbox2.getRawButton(8);
     }
-    boolean xbox2_lClick() {
+    public boolean xbox2_lClick() {
     	if (!xbox2.getRawButton(9)){
     		Xbox2arr[8] = false;
     	}
     	return xbox2.getRawButton(9);
     }
-    boolean xbox2_rClick() {
+    public boolean xbox2_rClick() {
     	if (!xbox2.getRawButton(10)){
     		Xbox2arr[9] = false;
     	}
     	return xbox2.getRawButton(10);
     }
-    boolean xbox2_lTTapped() {
+    public boolean xbox2_lTTapped() {
     	if(xbox2.getRawAxis(2) <= .50){
     		Xbox2arr[10] = false;
     		return false;
@@ -602,7 +602,7 @@ public class OI {
     	}
     	//return false;
     }
-    boolean xbox2_rTTapped() {
+    public boolean xbox2_rTTapped() {
     	if(xbox2.getRawAxis(3) <= .50){
     		Xbox2arr[11] = false;
     		return false;
@@ -621,55 +621,55 @@ public class OI {
     int xbox2_POV(){
     	return xbox2.getPOV();
     }
-    boolean xbox2_POVN() {
+    public boolean xbox2_POVN() {
     	if (xbox2.getPOV()!=0){
     		Xbox2arrPOV[0] = false;
     	}
     	return xbox2.getPOV()==0;
     }
-    boolean xbox2_POVNE() {
+    public boolean xbox2_POVNE() {
     	if (xbox2.getPOV()!=45){
     		Xbox2arrPOV[1] = false;
     	}
     	return xbox2.getPOV()==45;
     }
-    boolean xbox2_POVE() {
+    public boolean xbox2_POVE() {
     	if (xbox2.getPOV()!=90){
     		Xbox2arrPOV[2] = false;
     	}
     	return xbox2.getPOV()==90;
     }
-    boolean xbox2_POVSE() {
+    public boolean xbox2_POVSE() {
     	if (xbox2.getPOV()!=135){
     		Xbox2arrPOV[3] = false;
     	}
     	return xbox2.getPOV()==135;
     }
-    boolean xbox2_POVS() {
+    public boolean xbox2_POVS() {
     	if (xbox2.getPOV()!=180){
     		Xbox2arrPOV[4] = false;
     	}
     	return xbox2.getPOV()==180;
     }
-    boolean xbox2_POVSW() {
+    public boolean xbox2_POVSW() {
     	if (xbox2.getPOV()!=225){
     		Xbox2arrPOV[5] = false;
     	}
     	return xbox2.getPOV()==255;
     }
-    boolean xbox2_POVW() {
+    public boolean xbox2_POVW() {
     	if (xbox2.getPOV()!=270){
     		Xbox2arrPOV[6] = false;
     	}
     	return xbox2.getPOV()==270;
     }
-    boolean xbox2_POVNW() {
+    public boolean xbox2_POVNW() {
     	if (xbox2.getPOV()!=315){
     		Xbox2arrPOV[7] = false;
     	}
     	return xbox2.getPOV()==315;
     }
-    boolean xbox2_POVNTapped() {
+    public boolean xbox2_POVNTapped() {
     	if (xbox2.getPOV()!=0){
     		Xbox2arrPOV[0] = false;
     		return false;
@@ -685,7 +685,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVNETapped() {
+    public boolean xbox2_POVNETapped() {
     	if (xbox2.getPOV()!=45){
     		Xbox2arrPOV[1] = false;
     		return false;
@@ -701,7 +701,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVETapped() {
+    public boolean xbox2_POVETapped() {
     	if (xbox2.getPOV()!=90){
     		Xbox1arrPOV[2] = false;
     		return false;
@@ -717,7 +717,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVSETapped() {
+    public boolean xbox2_POVSETapped() {
     	if (xbox2.getPOV()!=135){
     		Xbox2arrPOV[3] = false;
     		return false;
@@ -733,7 +733,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVSTapped() {
+    public boolean xbox2_POVSTapped() {
     	if (xbox2.getPOV()!=180){
     		Xbox2arrPOV[4] = false;
     		return false;
@@ -749,7 +749,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVSWTapped() {
+    public boolean xbox2_POVSWTapped() {
     	if (xbox2.getPOV()!=225){
     		Xbox2arrPOV[5] = false;
     		return false;
@@ -765,7 +765,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVWTapped() {
+    public boolean xbox2_POVWTapped() {
     	if (xbox2.getPOV()!=270){
     		Xbox2arrPOV[6] = false;
     		return false;
@@ -781,7 +781,7 @@ public class OI {
     	}
     //	return false;
     }
-    boolean xbox2_POVNWTapped() {
+    public boolean xbox2_POVNWTapped() {
     	if (xbox2.getPOV()!=315){
     		Xbox2arrPOV[7] = false;
     		return false;

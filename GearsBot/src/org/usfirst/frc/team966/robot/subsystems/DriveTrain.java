@@ -14,6 +14,8 @@ import org.usfirst.frc.team966.robot.Robot;
 import org.usfirst.frc.team966.robot.commands.TankDriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team966.robot.Robot;
+
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
  * the robots chassis. These include four drive motors, a left and right encoder
@@ -101,20 +103,35 @@ public class DriveTrain extends Subsystem {
 		left_motor.set(deadbandleft);
 		right_motor.set(deadbandright);
 	}
+	
+	public void arcadeDrive(double y, double x) {
+		double deadband_y=y;	//Left value after considering deadband
+		double deadband_x=x;  //Right value after considering deadband
+		if(y > -.10 && y < .10){
+			deadband_y=0;
+		}
+		if(x > -.10 && x < .10){
+			deadband_x=0;
+		}
+		if(deadband_y != 0){
+			left_motor.set(deadband_y);
+			right_motor.set(deadband_y);
+		}
+		if(deadband_x != 0){
+			left_motor.set(deadband_x);
+			right_motor.set(-deadband_x);
+		}
+	}
 		
 	
 	/**
 	 * @param joy The ps3 style joystick to use to drive tank style.
-	 */
-/**	public void drive(Joystick joy) {
-		drive(-joy.getY(), -joy.getAxis(AxisType.kThrottle));
-	}*/
+	 
+
 	public void drive(Joystick xbox1) {
-		drive(-xbox1.getRawAxis(1), xbox1.getRawAxis(5));
+		drive(-Robot.oi.xbox1_y1(), Robot.oi.xbox1_y2());
 	}
-/**	public void drive(Joystick xbox2) {
-		drive(-xbox2.getY(), -xbox2.getAxis(AxisType.kThrottle));
-	}
+
 	/**
 	 * @return The robots heading in degrees.
 	 */
