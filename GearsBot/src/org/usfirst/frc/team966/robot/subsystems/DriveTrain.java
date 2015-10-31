@@ -91,50 +91,50 @@ public class DriveTrain extends Subsystem {
 	 * @param right Speed in range [-1,1]
 	 */
 	public void drive(double left, double right) {
-		//drive.tankDrive(left, right);
+		drive.tankDrive(1, 2);
 		double deadbandleft=left;	//Left value after considering deadband
 		double deadbandright=right;  //Right value after considering deadband
-		if(left > -.10 && left < .10){
+		if(left > -.20 && left < .20){
 			deadbandleft=0;
 		}
-		if(right > -.10 && right < .10){
+		if(right > -.20 && right < .20){
 			deadbandright=0;
 		}
-		left_motor.set(deadbandleft);
+		left_motor.set(-deadbandleft);
 		right_motor.set(deadbandright);
 	}
 	
 	public void arcadeDrive(double y, double x) {
 		double deadband_y=y;	//Left value after considering deadband
 		double deadband_x=x;  //Right value after considering deadband
-		if(y > -.10 && y < .10){
+		if(y > -.20 && y < .20){
 			deadband_y=0;
 		}
-		if(x > -.10 && x < .10){
+		if(x > -.20 && x < .20){
 			deadband_x=0;
 		}
 		if(deadband_y != 0){
-			left_motor.set(deadband_y);
+			left_motor.set(-deadband_y);
 			right_motor.set(deadband_y);
 		}
 		if(deadband_x != 0){
 			left_motor.set(deadband_x);
-			right_motor.set(-deadband_x);
+			right_motor.set(deadband_x);
 		}
 	}
 		
 	
-	/**
-	 * @param joy The ps3 style joystick to use to drive tank style.
+	
+	// @param joy The ps3 style joystick to use to drive tank style.
 	 
 
-	public void drive(Joystick xbox1) {
-		drive(-Robot.oi.xbox1_y1(), Robot.oi.xbox1_y2());
-	}
+//	public void drive(Joystick xbox1) {
+//		drive(-Robot.oi.xbox1_y1(), Robot.oi.xbox1_y2());
+//	}
 
-	/**
-	 * @return The robots heading in degrees.
-	 */
+	
+	// *// @return The robots heading in degrees.
+	// */
 	public double getHeading() {
 		return gyro.getAngle();
 	}

@@ -12,7 +12,7 @@ import org.usfirst.frc.team966.robot.Robot;
  * the tolerance, but leaves the PID loop running to maintain the position. Other
  * commands using the elevator should make sure they disable PID!
  */
-public class SetElevatorSetpoint extends Command {
+/**public class SetElevatorSetpoint extends Command {
     private double setpoint;
     
     public SetElevatorSetpoint(double setpoint) {
@@ -22,8 +22,8 @@ public class SetElevatorSetpoint extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.elevator.enable();
-        Robot.elevator.setSetpoint(setpoint);
+    //    Robot.elevator.enable();
+    //    Robot.elevator.setSetpoint(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,9 +31,9 @@ public class SetElevatorSetpoint extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return Robot.elevator.onTarget();
-    }
+//    protected boolean isFinished() {
+    //    return Robot.elevator.onTarget();
+//    }
 
     // Called once after isFinished returns true
     protected void end() {
@@ -44,3 +44,4 @@ public class SetElevatorSetpoint extends Command {
     protected void interrupted() {
     }
 }
+*/

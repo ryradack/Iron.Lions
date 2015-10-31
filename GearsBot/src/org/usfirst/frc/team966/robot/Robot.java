@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 
         // Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(drivetrain);
-        SmartDashboard.putData(elevator);
+    //    SmartDashboard.putData(elevator);
     //    SmartDashboard.putData(wrist);
         SmartDashboard.putData(claw);
     }
@@ -96,7 +96,7 @@ public class Robot extends IterativeRobot {
 	 */
     private void log() {
     //    wrist.log();
-        elevator.log();
+    //    elevator.log();
         drivetrain.log();
         claw.log();
     }

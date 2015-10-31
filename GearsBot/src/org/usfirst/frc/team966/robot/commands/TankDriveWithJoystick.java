@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveWithJoystick extends Command {
     
+	private boolean tankDrive;
+	
 	private int clawopen=0;
 	private int grabberopen=0;
 	
     public TankDriveWithJoystick() {
     	
-    	
+//    	requires(Robot.elevator);
         requires(Robot.drivetrain);
         requires(Robot.claw);
     }
@@ -28,8 +30,23 @@ public class TankDriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-     //   Robot.drivetrain.drive(Robot.oi.getJoystick());
-        if(Robot.oi.xbox1_aTapped()) {
+
+    	if (Robot.oi.xbox1_start()){
+    		if (tankDrive = true){
+    			tankDrive = false;
+    		}
+    		else {
+    			tankDrive = true;
+    		}
+    	} 
+    	if (tankDrive = true){
+    		Robot.drivetrain.drive(Robot.oi.xbox1_y1(), Robot.oi.xbox1_y2());
+    	}
+    	else{
+        	Robot.drivetrain.arcadeDrive(Robot.oi.xbox1_y1(), Robot.oi.xbox1_x2());
+        }
+    	
+    	if(Robot.oi.xbox1_aTapped()) {
         	if (clawopen==0){
         		Robot.claw.clawOpen();
         		clawopen=1;
@@ -48,7 +65,10 @@ public class TankDriveWithJoystick extends Command {
         		Robot.claw.grabberClose();
         		grabberopen=0;
         	}
-        }      
+        }
+//        if(Robot.oi.xbox1_rT()){
+//        	Robot.elevator.elevatorup();
+//        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

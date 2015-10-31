@@ -27,9 +27,9 @@ public class OI {
     //boolean tappedArray_xbox1[12]{false,false,false,false,false,false,false,false,false,false,false,false}; 
     public OI() {
     	// Put Some buttons on the SmartDashboard
-        SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
-        SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
-        SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
+//        SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
+//        SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
+//        SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
         
    //     SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
    //     SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
@@ -54,9 +54,9 @@ public class OI {
     }
 
     
-//    public Joystick getJoystick(){
-//        return xbox1;
-//	}
+    public Joystick getJoystick(){
+        return xbox1;
+	}
     public double xbox1_y1() {
     	return xbox1.getRawAxis(1);
     }
@@ -129,7 +129,7 @@ public class OI {
     	}
     	return xbox1.getRawButton(5);
     }
-    public boolean xbox1_select() {
+    public boolean xbox1_back() {
     	if (!xbox1.getRawButton(7)){
     		Xbox1arr[6] = false;
     	}
@@ -249,7 +249,7 @@ public class OI {
     	}
     	//return false;
     }
-    public boolean xbox1_selectTapped() {
+    public boolean xbox1_backTapped() {
     	if(!xbox1.getRawButton(7)){
     		Xbox1arr[6] = false;
     		return false;
@@ -562,7 +562,7 @@ public class OI {
     	}
     	return xbox2.getRawButton(5);
     }
-    public boolean xbox2_select() {
+    public boolean xbox2_back() {
     	if (!xbox2.getRawButton(7)){
     		Xbox2arr[6] = false;
     	}
