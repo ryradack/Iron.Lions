@@ -24,11 +24,7 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("x-axis", Robot.oi.getXbox1().getRawAxis(1));
-    	SmartDashboard.putNumber("y-axis", Robot.oi.getXbox1().getRawAxis(4));
-    	//Robot.drivetrain.move(1,1);
-//    	Robot.drivetrain.arcadeDrive(Robot.oi.getXbox1());
-    	Robot.drivetrain.oldArcade(Robot.oi.getXbox1().getRawAxis(1), Robot.oi.getXbox1().getRawAxis(4));
+    	Robot.drivetrain.arcadeDrive(Robot.oi.getXbox1().getRawAxis(1), Robot.oi.getXbox1().getRawAxis(4));
     }
 
     // Make this return true when this Command no longer needs to run execute()

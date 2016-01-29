@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Navigation extends Subsystem {
 	
-	private AHRS ahrs;
+	public AHRS ahrs;
 	CameraServer server;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team967.robot.subsystems.*;
 import org.usfirst.frc.team967.robot.commands.ReachDefencesAuto;
+import org.usfirst.frc.team967.robot.commands.AutoDrivePID;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -17,11 +18,15 @@ import edu.wpi.first.wpilibj.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	Command reachDefencesAutonomousCommand;
-	
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	public static Navigation navigation;
+	public static Intake intake;
+	public static Climber climber;
+	
+	Command reachDefencesAutonomousCommand;
+	Command autoDrivePIDCommand;
+
 	
 //	RobotDrive myRobot;
 //	Joystick stick;
@@ -32,40 +37,38 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	reachDefencesAutonomousCommand = new ReachDefencesAuto();
     	drivetrain = new DriveTrain();
-    	oi = new OI();
     	navigation = new Navigation();
-    	
+    	intake = new Intake();
+    	climber = new Climber();
+    	oi = new OI();
+    	reachDefencesAutonomousCommand = new ReachDefencesAuto();
+    	autoDrivePIDCommand = new AutoDrivePID();
+
     }
     
     /**
      * This function is run once each time the robot enters autonomous mode
      */
     public void autonomousInit() {
-    	reachDefencesAutonomousCommand.start();
-  //  	autoLoopCounter = 0;
+//    	reachDefencesAutonomousCommand.start();
+    	autoDrivePIDCommand.start();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-  //  	if(autoLoopCounter < 100) //Check if we've completed 100 loops (approximately 2 seconds)
-	//	{
-		//	myRobot.drive(-0.5, 0.0); 	// drive forwards half speed
-			//autoLoopCounter++;
-//			} else {
-	//		myRobot.drive(0.0, 0.0); 	// stop robot
-//		}
+    	Scheduler.getInstance().run();
+        log();
     }
     
     /**
      * This function is called once each time the robot enters tele-operated mode
      */
     public void teleopInit(){
-    	
-    	reachDefencesAutonomousCommand.cancel();
+    	autoDrivePIDCommand.cancel();
+//    	reachDefencesAutonomousCommand.cancel();
     }
 
     /**
@@ -84,11 +87,14 @@ public class Robot extends IterativeRobot {
     }
     
     public void log(){
+    	oi.log();
     	drivetrain.log();
     	navigation.log();
+    	climber.log();
+    	intake.log();
     	SmartDashboard.putData(drivetrain);
     	SmartDashboard.putData(navigation);
-    	
+    	SmartDashboard.putData(climber);
     	
     }
 }

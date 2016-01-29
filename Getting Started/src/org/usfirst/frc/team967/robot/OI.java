@@ -12,18 +12,16 @@ public class OI {
     private Joystick xbox1 = new Joystick(0);
     private Joystick xbox2 = new Joystick(1);
     private Joystick board = new Joystick(2);
-    
-//    boolean[] xbox1arr = new boolean[12];
+    boolean[] xbox1arr = new boolean[2];
+    double leftTrigger;
+    double rightTrigger;
 //    boolean[] xbox2arr = new boolean[12];
 //    boolean[] xbox1arrPOV = new boolean[8];
 //    boolean[] xbox2arrPOV = new boolean[8];
 //    boolean[] boardarr = new boolean[12];
 
     public OI() {
-    	SmartDashboard.putNumber("Xbox1 y-axis", xbox1.getRawAxis(1));
-    	SmartDashboard.putNumber("Xbox1 x-axis", xbox1.getRawAxis(4));
-    	SmartDashboard.putData("test button", new ReachDefencesAuto());
-    //	JoystickButton d_up = new JoystickButton(joy, 5);
+    	//	JoystickButton d_up = new JoystickButton(joy, 5);
     	JoystickButton xbox1_a = new JoystickButton(xbox1, 1);
     	JoystickButton xbox1_b = new JoystickButton(xbox1, 2);
     	JoystickButton xbox1_x = new JoystickButton(xbox1, 3);
@@ -34,6 +32,7 @@ public class OI {
     	JoystickButton xbox1_start = new JoystickButton(xbox1, 8);
     	JoystickButton xbox1_leftStick = new JoystickButton(xbox1, 9);
     	JoystickButton xbox1_rightStick = new JoystickButton(xbox1, 10);
+    	
     	//xbox1.getPOV();//0=north, 90=east, 180=south, 45=NE, ect.
     	
     	JoystickButton xbox2_a = new JoystickButton(xbox2, 1);
@@ -57,10 +56,37 @@ public class OI {
     	JoystickButton board_8 = new JoystickButton(board, 8);
     	JoystickButton board_9 = new JoystickButton(board, 9);
     	JoystickButton board_10 = new JoystickButton(board, 10);
+    	//******************************************************
+    	rightTrigger = xbox1.getRawAxis(3);
+    	leftTrigger = xbox1.getRawAxis(2);
     	
+    	if(leftTrigger > .75){
+    		new ShiftDriveHigh();
+    	}
+    	else{
+    		new ShiftDriveLow();
+    	}
     	//example connecting command to button
     	//whenPressed, whenReleased, whileHeld
-    	xbox1_a.whenPressed(new ShiftDrive());
+    	xbox1_a.whenPressed(new PTOShiftOn());
+    	xbox1_x.whenPressed(new ShiftDriveHigh());
+    	xbox1_y.whenPressed(new ShiftDriveLow());
+    	
+    	
+//    	xbox2_a.whenPressed(new ShiftClimberUp());
+    	
+    }
+    
+    public void log(){
+    	SmartDashboard.putNumber("leftTrigger", xbox1.getRawAxis(2));
+    	SmartDashboard.putNumber("Xbox1 y-axis", xbox1.getRawAxis(1));
+    	SmartDashboard.putNumber("3", xbox1.getRawAxis(3));
+    	SmartDashboard.putNumber("Xbox1 4", xbox1.getRawAxis(4));
+    	SmartDashboard.putNumber("5", xbox1.getRawAxis(5));
+    	SmartDashboard.putNumber("Xbox1 6", xbox1.getRawAxis(6));
+    	
+    	SmartDashboard.putNumber("Xbox1 x-axis", xbox1.getRawAxis(4));
+    	SmartDashboard.putData("Reach Defences Auto", new ReachDefencesAuto());
     }
     
     public Joystick getXbox1() {

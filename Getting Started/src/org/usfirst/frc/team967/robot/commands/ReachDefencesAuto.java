@@ -8,6 +8,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ReachDefencesAuto extends CommandGroup {
     
     public  ReachDefencesAuto() {
+    	addSequential(new AutoDrivePID());
+    //	addParallel(new LowerArm());
+    	
+    	addSequential(new AutoDrivePID());
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
