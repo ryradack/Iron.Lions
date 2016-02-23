@@ -11,7 +11,7 @@ public class IntakeToPosition extends Command {
 	private int position;
 	
     public IntakeToPosition(int Position) {
-    	this.position = Position;
+    	this.position = Position;//between .088(up) and .122(down)
     	requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

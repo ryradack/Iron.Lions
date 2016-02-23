@@ -64,6 +64,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopInit(){
     	autoDrivePIDCommand.cancel();
+    	drivetrain.ptoOff();
+    	drivetrain.shiftLow();
 //    	reachDefencesAutonomousCommand.cancel();
     }
 
@@ -90,6 +92,7 @@ public class Robot extends IterativeRobot {
     	intake.log();
     	//Displays the command that is using the subsystem at that time
     	SmartDashboard.putData(drivetrain);
+    	SmartDashboard.putData(intake);
     	SmartDashboard.putData(navigation);
     	SmartDashboard.putData(climber);
     }

@@ -1,25 +1,31 @@
 package org.usfirst.frc.team967.robot.subsystems;
 
+import org.usfirst.frc.team967.robot.Robot;
 import org.usfirst.frc.team967.robot.commands.IntakeArmMove;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-/**
- *
- */
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+
 public class Intake extends Subsystem {
     private Talon armMotor, beltMotor;
 //    private Encoder armEncoder;
-    private AnalogPotentiometer armPot;
+    private AnalogInput armPot;//AnalogPotentiometer armPot;
+    public double armSpeed;
+    public boolean nitro;
     
     public Intake() {
-    	armMotor = new Talon(1);
-    	beltMotor = new Talon(2);
+    	armMotor = new Talon(0);
+    	beltMotor = new Talon(1);
 //    	armEncoder = new Encoder(2, 3);
-    	armPot = new AnalogPotentiometer(4);
+    	armPot = new AnalogInput(2);
+//    	armPot = new AnalogPotentiometer(2);
     }
     public void beltIn(){
     	beltMotor.set(1);
@@ -27,27 +33,31 @@ public class Intake extends Subsystem {
     public void beltOut(){
     	beltMotor.set(-1);
     }
+    public void beltMove(double speed){
+    	beltMotor.set(speed);
+    }
+    public void setArmSpeed(){
+    	double deadband = .2;
+    	armSpeed = Robot.oi.getXbox2().getRawAxis(1)/3;
+    	if(armSpeed < -deadband && armSpeed > deadband){
+    		armSpeed = 0;
+    	}	
+    }
     public void armUp(){
-    	armMotor.set(1);
+    	armMotor.set(.25);
     }
     public void armDown(){
-    	armMotor.set(-1);
+    	armMotor.set(-.25);
     }
     public void armMove(double speed){
     	armMotor.set(speed);
     }
-    public boolean armToDown(){
-    	if(armPot.get() < 10){//10 would be the bottom limit
-    		armMotor.set(0);
-    		return true;
-    	}
-    	else{
-    		armMotor.set(-1);
-    		return false;
-    	}
+    public void switchNitro(){
+    	nitro = !nitro;
     }
-    public boolean armToUp(){
-    	if(armPot.get() > 250){//10 would be the bottom limit
+    
+    public boolean armToDown(){
+    	if(armPot.getVoltage() > .980){//
     		armMotor.set(0);
     		return true;
     	}
@@ -56,12 +66,22 @@ public class Intake extends Subsystem {
     		return false;
     	}
     }
-    public boolean armToPosition(int position){
-    	if(armPot.get() > (position+5)){//10 would be the bottom limit
+    public boolean armToUp(){
+    	if(armPot.getVoltage() < .595){//
+    		armMotor.set(0);
+    		return true;
+    	}
+    	else{
     		armMotor.set(-1);
     		return false;
     	}
-    	else if(armPot.get() < (position-5)){
+    }
+    public boolean armToPosition(int position){
+    	if(armPot.getVoltage() > (position+.01)){//
+    		armMotor.set(-1);
+    		return false;
+    	}
+    	else if(armPot.getVoltage() < (position-.01)){
     		armMotor.set(1);
     		return false;
     	}
@@ -72,14 +92,16 @@ public class Intake extends Subsystem {
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
+    
     public void initDefaultCommand() {
         setDefaultCommand(new IntakeArmMove());
     	// Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     public void log(){
-   // 	SmartDashboard.putNumber("Arm Speed", armMotor.get());
+    	SmartDashboard.putNumber("Arm Speed", armMotor.get());
+    	SmartDashboard.putNumber("Arm pot", armPot.getVoltage());
+    	SmartDashboard.putBoolean("Arm Nitro", nitro);
    // 	SmartDashboard.putNumber("Right Speed", beltMotor.get());
 
     }

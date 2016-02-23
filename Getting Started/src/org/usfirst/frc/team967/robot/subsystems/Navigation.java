@@ -8,13 +8,12 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
+
+
 public class Navigation extends Subsystem {
 	
 	public AHRS ahrs;
-	CameraServer server;
+	CameraServer serverFront, serverRear;
 	public AnalogInput ultrasonic1;
 	public AnalogInput ultrasonic2;
     // Put methods for controlling this subsystem
@@ -23,10 +22,15 @@ public class Navigation extends Subsystem {
 		ultrasonic1 = new AnalogInput(0);
 		ultrasonic2 = new AnalogInput(1);
 		ahrs = new AHRS(I2C.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */	
+		
 		//stream off camera to smartDashboard
-		server = CameraServer.getInstance();
-    	server.setQuality(50);
-    	server.startAutomaticCapture("cam1");
+		serverFront = CameraServer.getInstance();
+    	serverFront.setQuality(50);
+    	serverFront.startAutomaticCapture("cam1");
+    	
+    	serverRear = CameraServer.getInstance();
+    	serverRear.setQuality(50);
+    	serverRear.startAutomaticCapture("cam2");
 	}
     public void initDefaultCommand() {
     	
@@ -58,9 +62,5 @@ public class Navigation extends Subsystem {
   */  	
 
     }
-    
-    
-    
-    
 }
 

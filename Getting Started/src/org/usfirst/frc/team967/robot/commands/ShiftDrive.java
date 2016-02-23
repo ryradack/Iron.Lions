@@ -17,19 +17,16 @@ public class ShiftDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.drivetrain.driveShift();
+    	Robot.drivetrain.driveShift();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if(Robot.oi.getXbox1().getRawAxis(2) > .75){
-    		Robot.drivetrain.driveShift();
-//    	}
+//    		Robot.drivetrain.driveShift();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    //    return false;
     	return true;
     }
 

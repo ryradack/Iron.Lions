@@ -21,36 +21,4 @@ public class POVButton extends Button {
 			return false;
 		}
 	}
-/*	public boolean getNorth(){
-		if(joy.getPOV(POV) == 0){
-			return true;
-		}	
-		else{
-			return false;
-		} 
-	}
-	public boolean getEast(){
-		if(joy.getPOV(POV) == 90){
-			return true;
-		}	
-		else{
-			return false;
-		} 
-	}
-	public boolean getSouth(){
-		if(joy.getPOV(POV) == 180){
-			return true;
-		}	
-		else{
-			return false;
-		} 
-	}
-	public boolean getWest(){
-		if(joy.getPOV(POV) == 270){
-			return true;
-		}	
-		else{
-			return false;
-		} 
-	}*/
 }

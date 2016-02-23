@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  *
  */
-public class AutoDrivePID extends Command {
+public class AutoTurnPID extends Command {
 	double count=0;
-	double PIDDriveCommand=0;
+	double PIDTurnCommand=0;
 	double Pout=0;
 	double Iout=0;
 	double Ierror=0;
@@ -28,7 +28,7 @@ public class AutoDrivePID extends Command {
 	
 
 	
-    public AutoDrivePID() {
+    public AutoTurnPID() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -40,28 +40,28 @@ public class AutoDrivePID extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("Drive PID Error", error);
-    	SmartDashboard.putNumber("Drive Show kp", kp);
-    	SmartDashboard.putNumber("Drive Show ki", ki);
-    	SmartDashboard.putNumber("Drive Show kd", kd);
-    	SmartDashboard.putNumber("Drive P out", Pout);
-    	SmartDashboard.putNumber("Drive I out", Iout);
-    	SmartDashboard.putNumber("Drive D out", Dout);
-    	SmartDashboard.putNumber("Drive mapValue", map(Pout+Iout, -threshold, threshold, -1, 1));
-    	SmartDashboard.putNumber("Drive mapValue2", map(200, -threshold, threshold, -1, 1));
+    	SmartDashboard.putNumber("Turn PID Error", error);
+    	SmartDashboard.putNumber("Turn Show kp", kp);
+    	SmartDashboard.putNumber("Turn Show ki", ki);
+    	SmartDashboard.putNumber("Turn Show kd", kd);
+    	SmartDashboard.putNumber("Turn P out", Pout);
+    	SmartDashboard.putNumber("Turn I out", Iout);
+    	SmartDashboard.putNumber("Turn D out", Dout);
+    	SmartDashboard.putNumber("Turn mapValue", map(Pout+Iout, -threshold, threshold, -1, 1));
+    	SmartDashboard.putNumber("Turn mapValue2", map(200, -threshold, threshold, -1, 1));
     	
     	count++;
     	if(count > 3){
     		Pcontroller();
     		Icontroller();
     	
-    		PIDDriveCommand = map(Pout+Iout+Dout, -2*threshold, 2*threshold, -1 , 1);//Pout+Iout
+    		PIDTurnCommand = map(Pout+Iout+Dout, -2*threshold, 2*threshold, -1 , 1);//Pout+Iout
 //    		analogWrite(pin,PWM_Motor);
-    		Robot.drivetrain.arcadeDriveAuto(PIDDriveCommand, 0);
+    		Robot.drivetrain.arcadeDriveAuto(0, PIDTurnCommand);
 
     		count = 0;
     	}
-    	SmartDashboard.putNumber("PIDDriveCommand", PIDDriveCommand);
+    	SmartDashboard.putNumber("PIDTurnCommand", PIDTurnCommand);
     	SmartDashboard.putNumber("count", count);
     	
     	ki = SmartDashboard.getNumber("ki", ki);
@@ -95,10 +95,9 @@ public class AutoDrivePID extends Command {
 	void Pcontroller() {
 		
 		//Calculate Error
-//		error = (double) (setpoint - Robot.navigation.ahrs.getFusedHeading());// - setpoint);
-		error = (double) (setpoint - Robot.drivetrain.right_drive2.getEncPosition());
-//		if (error < -180){error += 360;}
-//		if (error > 180){error -= 360;}
+		error = (double) (setpoint - Robot.navigation.ahrs.getFusedHeading());// - setpoint);
+		if (error < -180){error += 360;}
+		if (error > 180){error -= 360;}
 		
 		//error = setpoint - normerror;
 		Pout = kp * error;
@@ -131,6 +130,3 @@ public class AutoDrivePID extends Command {
 		}
 	}
 }
-
-
- 
