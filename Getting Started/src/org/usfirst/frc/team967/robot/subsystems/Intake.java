@@ -4,7 +4,7 @@ import org.usfirst.frc.team967.robot.Robot;
 import org.usfirst.frc.team967.robot.commands.IntakeArmMove;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -15,14 +15,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends Subsystem {
     private Talon armMotor, beltMotor;
+    private DoubleSolenoid puncher;
 //    private Encoder armEncoder;
     private AnalogInput armPot;//AnalogPotentiometer armPot;
     public double armSpeed;
     public boolean nitro;
+    public boolean PuncherRetracted;
     
     public Intake() {
     	armMotor = new Talon(0);
     	beltMotor = new Talon(1);
+    	puncher = new DoubleSolenoid(0, 0, 1);
 //    	armEncoder = new Encoder(2, 3);
     	armPot = new AnalogInput(2);
 //    	armPot = new AnalogPotentiometer(2);
@@ -89,6 +92,24 @@ public class Intake extends Subsystem {
     		armMotor.set(0);
     		return true;
     	}
+    }
+    public void puncherOut(){
+    	PuncherRetracted = false;
+    	puncher.set(DoubleSolenoid.Value.kForward);
+    }
+    public void puncherIn(){
+    	PuncherRetracted = true;
+    	puncher.set(DoubleSolenoid.Value.kReverse);
+    }
+    public void puncherShift() {
+    	if(PuncherRetracted == false){//shifter.get() == DoubleSolenoid.Value.kReverse){
+    		puncher.set(DoubleSolenoid.Value.kForward);
+    		PuncherRetracted = false;
+    	}
+    	else{
+    		puncher.set(DoubleSolenoid.Value.kReverse);
+    		PuncherRetracted = true;
+    	}    	
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

@@ -10,13 +10,14 @@ import org.usfirst.frc.team967.robot.commands.IntakeStopBelt;
 import org.usfirst.frc.team967.robot.commands.IntakeToggleNitro;
 import org.usfirst.frc.team967.robot.commands.PTOShiftOff;
 import org.usfirst.frc.team967.robot.commands.PTOShiftOn;
+import org.usfirst.frc.team967.robot.commands.PuncherIn;
+import org.usfirst.frc.team967.robot.commands.PuncherOut;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveHigh;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveLow;
 import org.usfirst.frc.team967.robot.commands.SwitchArcadeDriveDirection;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
@@ -32,9 +33,13 @@ public class OI {
     public AxisButton xbox2_y1 = new AxisButton(xbox2, 1, .2, 2);
     
     public POVButton xbox1povN = new POVButton(xbox1, 0, 0);
+    public POVButton xbox1povNE = new POVButton(xbox1, 0, 45);
     public POVButton xbox1povE = new POVButton(xbox1, 0, 90);
+    public POVButton xbox1povSE = new POVButton(xbox1, 0, 135);
     public POVButton xbox1povS = new POVButton(xbox1, 0, 180);
+    public POVButton xbox1povSW = new POVButton(xbox1, 0, 225);
     public POVButton xbox1povW = new POVButton(xbox1, 0, 270);
+    public POVButton xbox1povNW = new POVButton(xbox1, 0, 315);
     
     public POVButton xbox2povN = new POVButton(xbox2, 0, 0);
     public POVButton xbox2povNE = new POVButton(xbox2, 0, 45);
@@ -100,11 +105,14 @@ public class OI {
     	xbox2_y1.whenPressed(new IntakeArmSpeedSet());
     	xbox2_a.whenPressed(new IntakeToggleNitro());
     	
-    	xbox1povN.whenPressed(new ClimberUp());
-    	xbox1povN.whenReleased(new ClimberStopExtention());
+    	xbox2_b.whenPressed(new PuncherOut());
+    	xbox2_b.whenReleased(new PuncherIn());
     	
-    	xbox1povS.whenPressed(new ClimberDown());
-    	xbox1povS.whenReleased(new ClimberStopExtention());
+    	xbox2povN.whenPressed(new ClimberUp());
+    	xbox2povN.whenReleased(new ClimberStopExtention());
+    	
+    	xbox2povS.whenPressed(new ClimberDown());
+    	xbox2povS.whenReleased(new ClimberStopExtention());
     }
     
     public void log(){

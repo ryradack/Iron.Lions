@@ -19,8 +19,8 @@ public class Climber extends Subsystem {
     public Climber() {
     	leftExtention = new CANTalon(5);
     	leftRotate = new CANTalon(6);
-    	rightExtention = new Talon(4);
-    	rightRotate = new Talon(6);
+    	rightExtention = new Talon(2);
+    	rightRotate = new Talon(3);
 //    	climberEncoderExtention = new Encoder(6, 7);
 //    	climberEncoderPivot = new Encoder(4, 5);
     	leftExtention.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);

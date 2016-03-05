@@ -1,8 +1,10 @@
 package org.usfirst.frc.team967.robot.subsystems;
 
 import org.usfirst.frc.team967.robot.commands.ArcadeDrive;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Victor;
 //import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +30,7 @@ public class DriveTrain extends Subsystem {
 	
 	//**************************************************************************
 	public CANTalon left_drive1, left_drive2, right_drive1, right_drive2;
+	public Victor leftBack, rightBack, leftFront, rightFront;
 //    private Encoder driveEncoderL, driveEncoderR;
     private DoubleSolenoid shifter, PTO;
     
@@ -38,6 +41,11 @@ public class DriveTrain extends Subsystem {
     public boolean PTOEngaged;
     //**************************************
     public DriveTrain() {
+    	leftBack = new Victor(8);
+    	leftFront = new Victor(9);
+    	rightFront = new Victor(6);
+    	rightBack = new Victor(7);
+    	//8 front left victor, 9 back left, 7 right back, 6 right front
     	left_drive1 = new CANTalon(1);
     	left_drive2 = new CANTalon(2);
     	right_drive1 = new CANTalon(3);
@@ -56,6 +64,10 @@ public class DriveTrain extends Subsystem {
     	left_drive2.set(left);
     	right_drive1.set(-right);
     	right_drive2.set(-right);
+    	leftBack.set(left);
+    	leftFront.set(left);
+    	rightBack.set(-right);
+    	rightBack.set(-right);
     }
     
     //For during teleop
