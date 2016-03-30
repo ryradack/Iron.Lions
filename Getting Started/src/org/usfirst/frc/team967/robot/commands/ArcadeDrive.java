@@ -24,8 +24,11 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.drivetrain.reverse == false && Robot.drivetrain.PTOEngaged == false){
-    		Robot.drivetrain.arcadeDrive(Robot.oi.getXbox1().getRawAxis(1), (Robot.oi.getXbox1().getRawAxis(4))*.75);
+    	if(Robot.drivetrain.reverse == false && Robot.drivetrain.PTOEngaged == false && Robot.drivetrain.halfDrive == false){
+    		Robot.drivetrain.arcadeDrive(-Robot.oi.getXbox1().getRawAxis(1), (Robot.oi.getXbox1().getRawAxis(4))*.75);
+    	}
+    	else if(Robot.drivetrain.reverse == false && Robot.drivetrain.PTOEngaged == false && Robot.drivetrain.halfDrive == true){
+    		Robot.drivetrain.arcadeDrive((-Robot.oi.getXbox1().getRawAxis(1))*.5, (Robot.oi.getXbox1().getRawAxis(4))*.75);
     	}
     	else if(Robot.drivetrain.PTOEngaged == false){
     		Robot.drivetrain.arcadeDrive(-Robot.oi.getXbox1().getRawAxis(1), (-Robot.oi.getXbox1().getRawAxis(4))*.75);

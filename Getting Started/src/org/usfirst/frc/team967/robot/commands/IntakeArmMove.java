@@ -21,12 +21,14 @@ public class IntakeArmMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.intake.nitro == true){
+    	if(Robot.intake.nitro == true && Robot.intake.ClimbMode == false){
     		Robot.intake.armMove(-Robot.oi.getXbox2().getRawAxis(1));
     	}
-    	else{
-    		Robot.intake.armMove(-Robot.oi.getXbox2().getRawAxis(1)/3);
-            
+    	else if(Robot.intake.nitro == false && Robot.intake.ClimbMode == false){
+    		Robot.intake.armMove(-Robot.oi.getXbox2().getRawAxis(1)/2);
+    	}
+    	else if(Robot.intake.ClimbMode == true){
+    		
     	}
     	//Robot.intake.armMove(Robot.intake.armSpeed);
     }

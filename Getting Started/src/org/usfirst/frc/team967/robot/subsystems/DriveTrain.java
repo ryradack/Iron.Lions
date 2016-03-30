@@ -5,7 +5,7 @@ import org.usfirst.frc.team967.robot.commands.ArcadeDrive;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Victor;
-//import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
 	//**************************************************************************
 	public CANTalon left_drive1, left_drive2, right_drive1, right_drive2;
 	public Victor leftBack, rightBack, leftFront, rightFront;
-//    private Encoder driveEncoderL, driveEncoderR;
+    private Encoder driveEncoderL, driveEncoderR;
     private DoubleSolenoid shifter, PTO;
     
 //    private RobotDrive drive;
@@ -39,6 +39,8 @@ public class DriveTrain extends Subsystem {
     public boolean InHighGear;
     public boolean reverse;
     public boolean PTOEngaged;
+    public boolean autoDone;
+    public boolean halfDrive;
     //**************************************
     public DriveTrain() {
     	leftBack = new Victor(8);
@@ -52,11 +54,13 @@ public class DriveTrain extends Subsystem {
     	right_drive2 = new CANTalon(4);
     	shifter = new DoubleSolenoid(0, 6, 5);  //5 LOW 6 HIGHT
     	PTO = new DoubleSolenoid(0, 4, 7);
-//    	driveEncoderL = new Encoder(0, 1);//encoder on Talon???
-//    	driveEncoderR = new Encoder(2, 3);//encoder on Talon???  see .setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	driveEncoderL = new Encoder(0, 1);//encoder on Talon???
+    	driveEncoderR = new Encoder(2, 3);//encoder on Talon???  see .setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	reverse = false;
-    	right_drive2.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	right_drive1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	autoDone = false;
+    	halfDrive = false;
+//    	right_drive2.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//    	right_drive1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     }
     
     public void move(double left, double right){
@@ -141,12 +145,24 @@ public class DriveTrain extends Subsystem {
     	reverse = !reverse;
     }
  
-    
+    public double encoderLCount(){
+    	return driveEncoderL.get();
+    }
+    public double encoderRCount(){
+    	return driveEncoderR.get();
+    }
+    public void DriveToHalf(){
+    	halfDrive = true;
+    }
+    public void DriveToFull(){
+    	halfDrive = false;
+    }
     
     public void log() {
-    	SmartDashboard.putNumber("Can Encoder", right_drive2.getEncPosition());
-		SmartDashboard.putNumber("Can Encoder Velocity", right_drive2.getEncVelocity());
-    	
+//    	SmartDashboard.putNumber("Can Encoder", right_drive2.getEncPosition());
+//		SmartDashboard.putNumber("Can Encoder Velocity", right_drive2.getEncVelocity());
+    	SmartDashboard.putNumber("Left Encoder", driveEncoderL.get());
+    	SmartDashboard.putBoolean("PTO engaged", PTOEngaged);
     	SmartDashboard.putBoolean("Drive Shifter High", InHighGear);
     	SmartDashboard.putNumber("Left Speed", left_drive1.get());
     	SmartDashboard.putNumber("Right Speed", right_drive1.get());

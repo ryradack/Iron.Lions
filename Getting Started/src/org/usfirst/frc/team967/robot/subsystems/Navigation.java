@@ -25,13 +25,28 @@ public class Navigation extends Subsystem {
 		
 		//stream off camera to smartDashboard
 		serverFront = CameraServer.getInstance();
-    	serverFront.setQuality(50);
-    	serverFront.startAutomaticCapture("cam1");
+    	serverFront.setQuality(15);
+    	serverFront.startAutomaticCapture("cam0");
     	
-    	serverRear = CameraServer.getInstance();
-    	serverRear.setQuality(50);
-    	serverRear.startAutomaticCapture("cam2");
+//    	serverRear = CameraServer.getInstance();
+//    	serverRear.setQuality(50);
+//    	serverRear.startAutomaticCapture("cam2");
 	}
+	
+	public double getRawXAngle(){
+		return ahrs.getRawGyroX();
+	}
+	public double getRawYAngle(){
+		return ahrs.getRawGyroY();
+	}
+	public double getRawZAngle(){
+		return ahrs.getRawGyroZ();
+	}
+	
+	
+	
+	
+	
     public void initDefaultCommand() {
     	
         // Set the default command for a subsystem here.

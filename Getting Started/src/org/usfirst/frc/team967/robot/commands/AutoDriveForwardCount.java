@@ -7,40 +7,37 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimberRotate extends Command {
+public class AutoDriveForwardCount extends Command {
+	private int Count;
 	
-    public ClimberRotate() {
-    	requires(Robot.climber);
-//    	requires(Robot.intake);
+    public AutoDriveForwardCount(int count) {
+    	this.Count = count;
+    	requires(Robot.drivetrain);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.drivetrain.arcadeDrive(.75, 0);
     }
-    
+
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.intake.ClimbMode == true){
-    		Robot.climber.climberRotateSeperate(Robot.oi.getXbox2().getRawAxis(1), Robot.oi.getXbox2().getRawAxis(5));
+    	if((Robot.drivetrain.encoderLCount()+Robot.drivetrain.encoderRCount())/2 > Count){
+    		Robot.drivetrain.autoDone = true;
     	}
-    	else{
-    		Robot.climber.climberRotate(Robot.oi.getXbox2().getRawAxis(5));
-    	}
-//    	Robot.climber.climberRotate(Robot.oi.getXbox2().getRawAxis(5));
-//    	Robot.climber.climberRotateSeperate(Robot.oi.getXbox2().getRawAxis(5), Robot.oi.getXbox2().getRawAxis(5));
     }
-    
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.drivetrain.autoDone;
     }
-    
+
     // Called once after isFinished returns true
     protected void end() {
     }
-    
+
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {

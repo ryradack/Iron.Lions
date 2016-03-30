@@ -1,34 +1,40 @@
 package org.usfirst.frc.team967.robot.commands;
 
-import org.usfirst.frc.team967.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+//import java.util.Timer;
 
 /**
  *
  */
-public class IntakeDown extends Command {
-	public double start;
-	
-    public IntakeDown() {
-    	requires(Robot.intake);
-        // Use requires() here to declare subsystem dependencies
+public class Delay extends Command {
+	private long seconds;
+	private long start;
+	private boolean timeUp;
+//	Timer timer = new Timer();
+    
+	public Delay(long sec) {
+		seconds = sec;
+        
+		// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.intake.
+    	start = System.currentTimeMillis();
+    	timeUp = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.armDown();
+    	if(System.currentTimeMillis() > (start + seconds*1000)){
+    		timeUp = true;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return timeUp;
     }
 
     // Called once after isFinished returns true

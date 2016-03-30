@@ -8,23 +8,27 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-
-
 public class Climber extends Subsystem {
-	private CANTalon leftExtention, leftRotate;
-	private Talon rightExtention, rightRotate;
-//    private Encoder climberEncoderExtention, climberEncoderPivot;
+	private CANTalon leftExtention, rightExtention;
+	private Talon leftRotate, rightRotate;
+//	private CANTalon leftExtention, leftRotate;
+//	private Talon rightExtention, rightRotate;
+
+	//    private Encoder climberEncoderExtention, climberEncoderPivot;
 //    private DoubleSolenoid climberShifter;
     
     public Climber() {
-    	leftExtention = new CANTalon(5);
-    	leftRotate = new CANTalon(6);
-    	rightExtention = new Talon(2);
+    	leftExtention  = new CANTalon(5);
+    	rightExtention = new CANTalon(6);
+//    	rightExtention = new Talon(2);
+
+//    	leftRotate = new CANTalon(6);
+    	leftRotate  = new Talon(2);
     	rightRotate = new Talon(3);
 //    	climberEncoderExtention = new Encoder(6, 7);
 //    	climberEncoderPivot = new Encoder(4, 5);
     	leftExtention.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	leftRotate.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+ //   	leftRotate.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	//leftRotate.getEncPosition(); gives encoder count.
     }
     // Put methods for controlling this subsystem
@@ -36,7 +40,7 @@ public class Climber extends Subsystem {
     	climberMove(-1);
     }
     public void climberMove(double speed){
-    	leftExtention.set(speed);
+    	leftExtention.set(-speed);
     	rightExtention.set(speed);
     }
 /*    public boolean climberToExtended(){
@@ -78,6 +82,10 @@ public class Climber extends Subsystem {
     	leftRotate.set(power);
     	rightRotate.set(power);
     }
+    public void climberRotateSeperate(double left, double right){
+    	leftRotate.set(left*.75);
+    	rightRotate.set(right*.75);
+    }
     public void climberRotateUp(){
     	climberRotate(1);
     }
@@ -95,18 +103,18 @@ public class Climber extends Subsystem {
     	}
     }*/
     public boolean climberToRotatePosition(int position){
-    	if(leftRotate.getEncPosition() > (position+5)){
-    		climberMove(-1);
-    		return false;
-    	}
-    	else if(leftRotate.getEncPosition() < (position-5)){//5 is a deadband
-    		climberRotate(1);
-    		return false;
-    	}
-    	else{
-    		climberRotate(0);
+//    	if(leftRotate.getEncPosition() > (position+5)){
+//    		climberMove(-1);
+//    		return false;
+//    	}
+//    	else if(leftRotate.getEncPosition() < (position-5)){//5 is a deadband
+//    		climberRotate(1);
+//    		return false;
+//    	}
+//    	else{
+//    		climberRotate(0);
     		return true;
-    	}
+//    	}
     }
     
     

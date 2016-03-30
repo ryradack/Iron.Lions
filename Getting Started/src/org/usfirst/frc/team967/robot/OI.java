@@ -3,11 +3,14 @@ package org.usfirst.frc.team967.robot;
 import org.usfirst.frc.team967.robot.commands.ClimberDown;
 import org.usfirst.frc.team967.robot.commands.ClimberStopExtention;
 import org.usfirst.frc.team967.robot.commands.ClimberUp;
+import org.usfirst.frc.team967.robot.commands.EjectBall;
+import org.usfirst.frc.team967.robot.commands.HalfDrive;
 import org.usfirst.frc.team967.robot.commands.IntakeArmSpeedSet;
 import org.usfirst.frc.team967.robot.commands.IntakeIn;
 import org.usfirst.frc.team967.robot.commands.IntakeOut;
 import org.usfirst.frc.team967.robot.commands.IntakeStopBelt;
 import org.usfirst.frc.team967.robot.commands.IntakeToggleNitro;
+import org.usfirst.frc.team967.robot.commands.NormalDrive;
 import org.usfirst.frc.team967.robot.commands.PTOShiftOff;
 import org.usfirst.frc.team967.robot.commands.PTOShiftOn;
 import org.usfirst.frc.team967.robot.commands.PuncherIn;
@@ -15,6 +18,7 @@ import org.usfirst.frc.team967.robot.commands.PuncherOut;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveHigh;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveLow;
 import org.usfirst.frc.team967.robot.commands.SwitchArcadeDriveDirection;
+import org.usfirst.frc.team967.robot.commands.ToggleClimbMode;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -31,6 +35,8 @@ public class OI {
     boolean lol;
     public AxisButton xbox1_lT = new AxisButton(xbox1, 2, .75, 1);
     public AxisButton xbox2_y1 = new AxisButton(xbox2, 1, .2, 2);
+    public AxisButton xbox1_RT = new AxisButton(xbox1, 2, .75, 1);
+//    public AxisButton xbox2_y1 = new AxisButton(xbox2, 1, .2, 2);
     
     public POVButton xbox1povN = new POVButton(xbox1, 0, 0);
     public POVButton xbox1povNE = new POVButton(xbox1, 0, 45);
@@ -74,6 +80,7 @@ public class OI {
     	JoystickButton xbox2_start = new JoystickButton(xbox2, 8);
     	JoystickButton xbox2_leftStick = new JoystickButton(xbox2, 9);
     	JoystickButton xbox2_rightStick = new JoystickButton(xbox2, 10);
+//    	JoystickButton xbox2_lt = new JoystickButton(xbox2, 11);   	
     	
 /*    	JoystickButton board_1 = new JoystickButton(board, 1);
     	JoystickButton board_2 = new JoystickButton(board, 2);
@@ -92,10 +99,17 @@ public class OI {
     	xbox1_back.whenPressed(new PTOShiftOff());    	
     	xbox1_lT.whenPressed(new ShiftDriveHigh());
     	xbox1_lT.whenReleased(new ShiftDriveLow());
+    	
+    	xbox1_RT.whenPressed(new HalfDrive());
+    	xbox1_RT.whenReleased(new NormalDrive());
+    	
+                
     	xbox1_y.whenPressed(new SwitchArcadeDriveDirection());
     	
     	//*****************************************************
     	//Xbox2************************
+    	xbox2_start.whenPressed(new ToggleClimbMode());
+    	
     	xbox2_lb.whenPressed(new IntakeIn());
     	xbox2_lb.whenReleased(new IntakeStopBelt());
     	
@@ -108,11 +122,17 @@ public class OI {
     	xbox2_b.whenPressed(new PuncherOut());
     	xbox2_b.whenReleased(new PuncherIn());
     	
+    	xbox2_x.whenPressed(new EjectBall());
+    	
     	xbox2povN.whenPressed(new ClimberUp());
     	xbox2povN.whenReleased(new ClimberStopExtention());
     	
     	xbox2povS.whenPressed(new ClimberDown());
     	xbox2povS.whenReleased(new ClimberStopExtention());
+
+//    	xbox2_lt.whenPressed(new ClimberRotateUp());
+//    	xbox2_lt.whenReleased(new ClimberRotateDown());
+
     }
     
     public void log(){
@@ -120,6 +140,7 @@ public class OI {
 //    	SmartDashboard.putNumber("Xbox1 y-axis", xbox1.getRawAxis(1));
 //    	SmartDashboard.putNumber("Xbox1 x-axis", xbox1.getRawAxis(4));
 //    	SmartDashboard.putData("Reach Defences Auto", new ReachDefencesAuto());
+    
     }
     
     public Joystick getXbox1() {

@@ -1,9 +1,8 @@
-package org.usfirst.frc.team967.robot;
+																																																																					package org.usfirst.frc.team967.robot;
 
+import org.usfirst.frc.team967.robot.commands.AutoDriveForwardCount;
 import org.usfirst.frc.team967.robot.commands.AutoDrivePID;
-import org.usfirst.frc.team967.robot.commands.AutoTurnPID;
-import org.usfirst.frc.team967.robot.commands.PuncherOut;
-import org.usfirst.frc.team967.robot.commands.ReachDefencesAuto;
+import org.usfirst.frc.team967.robot.commands.AutoLowBar;
 import org.usfirst.frc.team967.robot.subsystems.Climber;
 import org.usfirst.frc.team967.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team967.robot.subsystems.Intake;
@@ -29,9 +28,11 @@ public class Robot extends IterativeRobot {
 	public static Intake intake;
 	public static Climber climber;
 	
-	Command AutonomousCommand;
+	Command AutoToDefences;
+	Command AutoPassDefence;
 	SendableChooser autoChooser;
-//	Command autoDrivePIDCommand;
+	Command autoDrivePIDCommand;
+	Command AutoPassLowBar;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -44,22 +45,27 @@ public class Robot extends IterativeRobot {
     	climber = new Climber();
        	oi = new OI();
     	
-//    	AutonomousCommand = new ReachDefencesAuto();
-//    	autoDrivePIDCommand = new AutoDrivePID();
+    	AutoToDefences = new AutoDriveForwardCount(200);
+    	autoDrivePIDCommand = new AutoDrivePID();
+    	AutoPassDefence = new AutoDriveForwardCount(800);
+    	AutoPassLowBar = new AutoLowBar();
     	
     	autoChooser = new SendableChooser();
-    	autoChooser.addDefault("Default Program", new PuncherOut());
-    	autoChooser.addObject("Drive To Defence", new AutoTurnPID());
+    	autoChooser.addDefault("Drive Past Defence", new AutoDriveForwardCount(800));
+    	autoChooser.addObject("Drive To Defence", new AutoDriveForwardCount(200));
     }
     
     /**
      * This function is run once each time the robot enters autonomous mode
      */
     public void autonomousInit() {
-    	AutonomousCommand = (Command) autoChooser.getSelected();
-    	AutonomousCommand.start();
+    	drivetrain.ptoOff();
+    	drivetrain.shiftLow();
+    	AutoPassLowBar.start();
+//       	AutoPassDefence.start();
+//    	AutonomousCommand = (Command) autoChooser.getSelected();
+//    	AutonomousCommand.start();
 //    	reachDefencesAutonomousCommand.start();
-//    	autoDrivePIDCommand.start();
     }
 
     /**
@@ -74,10 +80,10 @@ public class Robot extends IterativeRobot {
      * This function is called once each time the robot enters tele-operated mode
      */
     public void teleopInit(){
-//    	autoDrivePIDCommand.cancel();
-    	drivetrain.ptoOff();
+    	AutoPassLowBar.cancel();
+//    	AutoPassDefence.cancel();
+       	drivetrain.ptoOff();
     	drivetrain.shiftLow();
-//    	AutonomousCommand.cancel();
     }
 
     /**

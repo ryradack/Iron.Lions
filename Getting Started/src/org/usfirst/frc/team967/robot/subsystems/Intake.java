@@ -21,6 +21,7 @@ public class Intake extends Subsystem {
     public double armSpeed;
     public boolean nitro;
     public boolean PuncherRetracted;
+    public boolean ClimbMode;
     
     public Intake() {
     	armMotor = new Talon(0);
@@ -29,6 +30,7 @@ public class Intake extends Subsystem {
 //    	armEncoder = new Encoder(2, 3);
     	armPot = new AnalogInput(2);
 //    	armPot = new AnalogPotentiometer(2);
+    	ClimbMode = false;
     }
     public void beltIn(){
     	beltMotor.set(1);
@@ -60,12 +62,12 @@ public class Intake extends Subsystem {
     }
     
     public boolean armToDown(){
-    	if(armPot.getVoltage() > .980){//
+    	if(armPot.getVoltage() > .53){//
     		armMotor.set(0);
     		return true;
     	}
     	else{
-    		armMotor.set(1);
+    		armMotor.set(.75);
     		return false;
     	}
     }
@@ -123,6 +125,8 @@ public class Intake extends Subsystem {
     	SmartDashboard.putNumber("Arm Speed", armMotor.get());
     	SmartDashboard.putNumber("Arm pot", armPot.getVoltage());
     	SmartDashboard.putBoolean("Arm Nitro", nitro);
+    	SmartDashboard.putBoolean("Climb Mode", ClimbMode);
+    	
    // 	SmartDashboard.putNumber("Right Speed", beltMotor.get());
 
     }
