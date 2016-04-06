@@ -30,6 +30,7 @@ public class IntakeArmMove extends Command {
     	else if(Robot.intake.ClimbMode == true){
     		
     	}
+    	Robot.intake.CheckForBall();
     	//Robot.intake.armMove(Robot.intake.armSpeed);
     }
 

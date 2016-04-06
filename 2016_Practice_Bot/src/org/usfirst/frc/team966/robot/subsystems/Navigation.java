@@ -16,21 +16,32 @@ public class Navigation extends Subsystem {
 	CameraServer serverFront, serverRear;
 	public AnalogInput ultrasonic1;
 	public AnalogInput ultrasonic2;
-    // Put methods for controlling this subsystem
+    public boolean cam1;
+	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public Navigation() {
+		cam1 = true;
 		ultrasonic1 = new AnalogInput(0);
 		ultrasonic2 = new AnalogInput(1);
 //		ahrs = new AHRS(I2C.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */	
 		
 		//stream off camera to smartDashboard
 		serverFront = CameraServer.getInstance();
-    	serverFront.setQuality(50);
-    	serverFront.startAutomaticCapture("cam1");
+    	serverFront.setQuality(30);
+    	serverFront.startAutomaticCapture("cam0");
     	
-    	serverRear = CameraServer.getInstance();
-    	serverRear.setQuality(50);
-    	serverRear.startAutomaticCapture("cam2");
+//    	serverRear = CameraServer.getInstance();
+//    	serverRear.setQuality(50);
+//    	serverRear.startAutomaticCapture("cam2");
+	}
+	
+	public void switchCamView(){
+		if(cam1 = true){
+			serverFront.startAutomaticCapture("cam0");
+		}
+		else{
+			serverFront.startAutomaticCapture("cam1");
+		}
 	}
     public void initDefaultCommand() {
     	

@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,13 +17,19 @@ public class Navigation extends Subsystem {
 	CameraServer serverFront, serverRear;
 	public AnalogInput ultrasonic1;
 	public AnalogInput ultrasonic2;
+	public int auto;
+	public DigitalInput position1, position2, position3, position4, position5;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public Navigation() {
 		ultrasonic1 = new AnalogInput(0);
 		ultrasonic2 = new AnalogInput(1);
 		ahrs = new AHRS(I2C.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */	
-		
+		position1 = new DigitalInput(4);
+		position2 = new DigitalInput(5);
+		position3 = new DigitalInput(6);
+		position4 = new DigitalInput(7);
+		position5 = new DigitalInput(8);
 		//stream off camera to smartDashboard
 		serverFront = CameraServer.getInstance();
     	serverFront.setQuality(15);
@@ -42,7 +49,27 @@ public class Navigation extends Subsystem {
 	public double getRawZAngle(){
 		return ahrs.getRawGyroZ();
 	}
-	
+	public int chooseAuto(){
+		if(position1.get() == true){
+			return 1;
+		}
+		if(position2.get() == true){
+			return 2;
+		}
+		if(position3.get() == true){
+			return 3;
+		}
+		if(position4.get() == true){
+			return 4;
+		}
+		if(position5.get() == true){
+			return 5;
+		}
+		else{
+			return 50;
+		}
+		
+	}
 	
 	
 	

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClimberToRetracted extends Command {
 //	private int position;
 	
-    public ClimberToRetracted(int Position) {
+    public ClimberToRetracted() {
 //    	position = Position;
     	requires(Robot.climber);
         // Use requires() here to declare subsystem dependencies

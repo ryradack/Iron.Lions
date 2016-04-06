@@ -1,5 +1,10 @@
 package org.usfirst.frc.team966.robot;
 
+import org.usfirst.frc.team966.robot.commands.CurrentShoot;
+import org.usfirst.frc.team966.robot.commands.MoveFlyWheel;
+import org.usfirst.frc.team966.robot.commands.SaveShooterSpeed;
+import org.usfirst.frc.team966.robot.commands.SetSpeed;
+import org.usfirst.frc.team966.robot.commands.Shoot;
 //import org.usfirst.frc.team966.robot.commands.ClimberDown;
 //import org.usfirst.frc.team966.robot.commands.ClimberStopExtention;
 //import org.usfirst.frc.team966.robot.commands.ClimberUp;
@@ -18,6 +23,7 @@ import org.usfirst.frc.team966.robot.commands.SwitchArcadeDriveDirection;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
@@ -94,6 +100,23 @@ public class OI {
 //    	xbox1_lT.whenReleased(new ShiftDriveLow());
     	xbox1_y.whenPressed(new SwitchArcadeDriveDirection());
     	
+    	
+    	xbox1_x.whenPressed(new Shoot());
+    	xbox1_x.whenReleased(new Shoot());
+    	
+    	xbox1_start.whenPressed(new SetSpeed());
+    	
+    	xbox1_a.whenPressed(new SaveShooterSpeed(true));//MoveFlyWheel(Robot.shooter.hold));
+    	xbox1_a.whenReleased(new SaveShooterSpeed(false));
+    	
+    	xbox1_b.whenPressed(new Shoot());
+    	xbox1_b.whenReleased(new MoveFlyWheel(0));
+    	
+    	xbox1povN.whenPressed(new MoveFlyWheel(1));
+    	xbox1povN.whenReleased(new MoveFlyWheel(0));
+    	
+    	xbox1povS.whenPressed(new MoveFlyWheel(-1));
+    	xbox1povS.whenReleased(new MoveFlyWheel(0));
     	//*****************************************************
     	//Xbox2************************
 //    	xbox2_lb.whenPressed(new IntakeIn());
@@ -117,7 +140,7 @@ public class OI {
     
     public void log(){
 //    	SmartDashboard.putNumber("leftTrigger", xbox1.getRawAxis(2));
-//    	SmartDashboard.putNumber("Xbox1 y-axis", xbox1.getRawAxis(1));
+    	SmartDashboard.putNumber("Xbox1 y-axis", xbox1.getRawAxis(1));
 //    	SmartDashboard.putNumber("Xbox1 x-axis", xbox1.getRawAxis(4));
 //    	SmartDashboard.putData("Reach Defences Auto", new ReachDefencesAuto());
     }

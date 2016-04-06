@@ -70,7 +70,7 @@ public class DriveTrain extends Subsystem {
     	right_drive2.set(-right);
     	leftBack.set(left);
     	leftFront.set(left);
-    	rightBack.set(-right);
+    	rightBack.set(-right);  
     	rightBack.set(-right);
     }
     

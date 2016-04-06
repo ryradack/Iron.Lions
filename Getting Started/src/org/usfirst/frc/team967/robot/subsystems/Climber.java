@@ -7,17 +7,19 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Climber extends Subsystem {
 	private CANTalon leftExtention, rightExtention;
 	private Talon leftRotate, rightRotate;
 //	private CANTalon leftExtention, leftRotate;
-//	private Talon rightExtention, rightRotate;
-
+	private boolean leftExtentionGood, rightExtentionGood;
 	//    private Encoder climberEncoderExtention, climberEncoderPivot;
 //    private DoubleSolenoid climberShifter;
     
     public Climber() {
+    	leftExtentionGood = false;
+    	rightExtentionGood = false;
     	leftExtention  = new CANTalon(5);
     	rightExtention = new CANTalon(6);
 //    	rightExtention = new Talon(2);
@@ -25,9 +27,8 @@ public class Climber extends Subsystem {
 //    	leftRotate = new CANTalon(6);
     	leftRotate  = new Talon(2);
     	rightRotate = new Talon(3);
-//    	climberEncoderExtention = new Encoder(6, 7);
-//    	climberEncoderPivot = new Encoder(4, 5);
     	leftExtention.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	rightExtention.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
  //   	leftRotate.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	//leftRotate.getEncPosition(); gives encoder count.
     }
@@ -43,16 +44,40 @@ public class Climber extends Subsystem {
     	leftExtention.set(-speed);
     	rightExtention.set(speed);
     }
-/*    public boolean climberToExtended(){
-    	if(leftExtention.getEncPosition() < 1000){//1000 should be the upright encoder value
-    		climberMove(1);
-    		return false;
+    public void climberMoveSeperate(double left, double right){
+    	leftExtention.set(-left);
+    	rightExtention.set(right);
+    }
+    public void climberMoveLeft(double left){
+    	leftExtention.set(-left);
+    }
+    public void climberMoveRight(double right){
+    	rightExtention.set(right);
+    }
+    
+    public boolean climberToExtended(){
+    	
+    	int done = 0;
+    	if(leftExtention.getEncPosition() > 1000){//1000 should be the upright encoder value
+    		climberMoveSeperate(0, .5);
+    		done = done+1;
+    	}
+    	if(rightExtention.getEncPosition() > 1000){
+    		climberMoveSeperate(.5, 0);
+    		
     	}
     	else{
     		climberMove(0);
     		return true;
     	}
+    	if(done > 2){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
     }
+    
     public boolean climberToRetracted(){
     	if(leftExtention.getEncPosition() > 0){//0 should be the upright encoder value
     		climberMove(-1);
@@ -62,19 +87,33 @@ public class Climber extends Subsystem {
     		climberMove(0);
     		return true;
     	}
-    }*/
+    }
     public boolean climberToExtentionPosition(int position){
-    	if(leftExtention.getEncPosition() > (position+5)){
-    		climberMove(-1);
-    		return false;
+    	if(leftExtention.getEncPosition() > (position+50)){
+    		climberMoveLeft(-1);
     	}
-    	else if(leftExtention.getEncPosition() < (position-5)){//5 is a deadband
-    		climberMove(1);
-    		return false;
+    	else if(leftExtention.getEncPosition() < (position-50)){//50 is a deadband
+    		climberMoveLeft(1);
     	}
     	else{
-    		climberMove(0);
+    		climberMoveLeft(0);
+    		leftExtentionGood = true;
+    	}
+    	if(rightExtention.getEncPosition() > (position+50)){
+    		climberMoveRight(-1);
+    	}
+    	else if(rightExtention.getEncPosition() < (position-50)){//50 is a deadband
+    		climberMoveRight(1);
+    	}
+    	else{
+    		climberMoveRight(0);
+    		rightExtentionGood = true;
+    	}
+    	if(leftExtentionGood && rightExtentionGood){
     		return true;
+    	}
+    	else{
+    		return false;
     	}
     }
   //Rotation***********************************************************************************
@@ -124,9 +163,10 @@ public class Climber extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public void log(){
+    	SmartDashboard.putNumber("LeftExtentionCount", leftExtention.getEncPosition());
+    	SmartDashboard.putNumber("RightExtentionCount", rightExtention.getEncPosition());
+    	
 //    	SmartDashboard.putNumber("Climber Speed", motor1.get());
 //    	SmartDashboard.putString("Climber Shifter", climberShifter.get());
-
     }
 }
-

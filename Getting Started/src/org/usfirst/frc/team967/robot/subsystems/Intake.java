@@ -4,6 +4,7 @@ import org.usfirst.frc.team967.robot.Robot;
 import org.usfirst.frc.team967.robot.commands.IntakeArmMove;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.Encoder;
@@ -18,10 +19,12 @@ public class Intake extends Subsystem {
     private DoubleSolenoid puncher;
 //    private Encoder armEncoder;
     private AnalogInput armPot;//AnalogPotentiometer armPot;
+    private DigitalInput BallSwitch;
     public double armSpeed;
     public boolean nitro;
     public boolean PuncherRetracted;
     public boolean ClimbMode;
+    public boolean GotBall;
     
     public Intake() {
     	armMotor = new Talon(0);
@@ -29,8 +32,11 @@ public class Intake extends Subsystem {
     	puncher = new DoubleSolenoid(0, 0, 1);
 //    	armEncoder = new Encoder(2, 3);
     	armPot = new AnalogInput(2);
+    	BallSwitch = new DigitalInput(9);
 //    	armPot = new AnalogPotentiometer(2);
     	ClimbMode = false;
+    	GotBall = false;
+    	
     }
     public void beltIn(){
     	beltMotor.set(1);
@@ -112,6 +118,14 @@ public class Intake extends Subsystem {
     		puncher.set(DoubleSolenoid.Value.kReverse);
     		PuncherRetracted = true;
     	}    	
+    }
+    public void CheckForBall(){
+    	if(BallSwitch.get()){
+    		GotBall = true;
+    	}
+    	else{
+    		GotBall = false;
+    	}
     }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

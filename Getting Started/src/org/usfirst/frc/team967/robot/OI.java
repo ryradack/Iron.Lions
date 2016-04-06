@@ -17,6 +17,7 @@ import org.usfirst.frc.team967.robot.commands.PuncherIn;
 import org.usfirst.frc.team967.robot.commands.PuncherOut;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveHigh;
 import org.usfirst.frc.team967.robot.commands.ShiftDriveLow;
+import org.usfirst.frc.team967.robot.commands.Shoot;
 import org.usfirst.frc.team967.robot.commands.SwitchArcadeDriveDirection;
 import org.usfirst.frc.team967.robot.commands.ToggleClimbMode;
 
@@ -35,7 +36,7 @@ public class OI {
     boolean lol;
     public AxisButton xbox1_lT = new AxisButton(xbox1, 2, .75, 1);
     public AxisButton xbox2_y1 = new AxisButton(xbox2, 1, .2, 2);
-    public AxisButton xbox1_RT = new AxisButton(xbox1, 2, .75, 1);
+    public AxisButton xbox1_RT = new AxisButton(xbox1, 3, .75, 1);
 //    public AxisButton xbox2_y1 = new AxisButton(xbox2, 1, .2, 2);
     
     public POVButton xbox1povN = new POVButton(xbox1, 0, 0);
@@ -103,7 +104,7 @@ public class OI {
     	xbox1_RT.whenPressed(new HalfDrive());
     	xbox1_RT.whenReleased(new NormalDrive());
     	
-                
+        xbox1_x.whenPressed(new Shoot());        
     	xbox1_y.whenPressed(new SwitchArcadeDriveDirection());
     	
     	//*****************************************************
@@ -125,8 +126,10 @@ public class OI {
     	xbox2_x.whenPressed(new EjectBall());
     	
     	xbox2povN.whenPressed(new ClimberUp());
+//    	xbox2povN.whenPressed(new ClimberToExtended());
     	xbox2povN.whenReleased(new ClimberStopExtention());
     	
+//    	xbox2povS.whenPressed(new ClimberToRetracted());
     	xbox2povS.whenPressed(new ClimberDown());
     	xbox2povS.whenReleased(new ClimberStopExtention());
 

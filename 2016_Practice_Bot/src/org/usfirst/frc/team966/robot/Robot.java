@@ -8,6 +8,7 @@ import org.usfirst.frc.team966.robot.subsystems.Climber;
 import org.usfirst.frc.team966.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team966.robot.subsystems.Intake;
 import org.usfirst.frc.team966.robot.subsystems.Navigation;
+import org.usfirst.frc.team966.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,6 +29,8 @@ public class Robot extends IterativeRobot {
 	public static Navigation navigation;
 	public static Intake intake;
 	public static Climber climber;
+	public static Shooter shooter;
+	public StringBuilder message;
 	
 	Command AutonomousCommand;
 	SendableChooser autoChooser;
@@ -38,10 +41,12 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	StringBuilder message = new StringBuilder();
     	drivetrain = new DriveTrain();
     	navigation = new Navigation();
     	intake = new Intake();
     	climber = new Climber();
+    	shooter = new Shooter();
        	oi = new OI();
     	
 //    	AutonomousCommand = new ReachDefencesAuto();
@@ -86,6 +91,20 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
     	Scheduler.getInstance().run();
     	log();
+    	
+   /* 	message.append("\tout:");
+    	message.append(shooter.Output);
+    	message.append("\tspd:");
+    	message.append(shooter.flyWheel.getSpeed() );
+    	
+    	message.append("\terr:");
+		message.append(shooter.flyWheel.getClosedLoopError());
+		message.append("\ttrg:");
+		message.append(shooter.Target);
+		
+		System.out.println(message.toString());
+		message.setLength(0);
+    */	
     }
     
     /**
@@ -101,6 +120,7 @@ public class Robot extends IterativeRobot {
     	navigation.log();
     	climber.log();
     	intake.log();
+    	shooter.log();
     	//Displays the command that is using the subsystem at that time
     	SmartDashboard.putData(drivetrain);
     	SmartDashboard.putData(intake);
